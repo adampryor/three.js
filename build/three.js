@@ -34664,9 +34664,12 @@ THREE.ArrowHelper.prototype.setColor = function ( hex ) {
 
 /**
  * @author mrdoob / http://mrdoob.com/
+ *
+ * parameters: See LineBasicMaterial
+ *
  */
 
-THREE.BoxHelper = function ( object ) {
+THREE.BoxHelper = function ( object, parameters ) {
 
 	//   5____4
 	// 1/___0/|
@@ -34706,8 +34709,12 @@ THREE.BoxHelper = function ( object ) {
 		vertices[ 2 ], vertices[ 6 ],
 		vertices[ 3 ], vertices[ 7 ]
 	);
-
-	THREE.Line.call( this, geometry, new THREE.LineBasicMaterial( { color: 0xffff00 } ), THREE.LinePieces );
+	
+	if(!parameters){
+		parameters = { color: 0xffff00 }
+	}
+	
+	THREE.Line.call( this, geometry, new THREE.LineBasicMaterial( parameters ), THREE.LinePieces );
 
 	if ( object !== undefined ) {
 
