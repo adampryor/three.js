@@ -691,7 +691,12 @@
 			camPosition.setFromMatrixPosition( camera.matrixWorld );
 			camRotation.setFromRotationMatrix( tempMatrix.extractRotation( camera.matrixWorld ) );
 
-			scale = worldPosition.distanceTo( camPosition ) / 6 * scope.size;
+			if(camera instanceof THREE.OrthographicCamera){
+				//Set size for Orthographic camera based on screen size, not distance from camera
+				scale = 0.05 * (camera.right - camera.left);
+			}else{
+				scale = worldPosition.distanceTo( camPosition ) / 6 * scope.size;			
+			}
 			this.position.copy( worldPosition );
 			this.scale.set( scale, scale, scale );
 
